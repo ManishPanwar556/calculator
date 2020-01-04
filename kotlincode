@@ -1,0 +1,140 @@
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.widget.ViewUtils
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity(),View.OnClickListener {
+lateinit var button:Array<Array<Button>>
+    var res1:Float=-1F
+    var res2:Float=-1F
+    var add:Boolean=false
+    var mul:Boolean=false
+    var div:Boolean=false
+    var min:Boolean=false
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        button= arrayOf(arrayOf(btn1,btn2,btn3,btndiv),
+                         arrayOf(btn4,btn5,btn6,btneq),
+                          arrayOf(btn7,btn8,btn9,btnpt),
+                          arrayOf(btn0,btnadd,btnmul),
+                          arrayOf(btnclr,btnmin)
+                         )
+        buttoninitialise()
+        for(i in button)
+        {
+            for(b in i)
+            {
+                b.setOnClickListener(this)
+            }
+        }
+
+    }
+    fun buttoninitialise()
+    {
+        for(i in button)
+        {
+            for(b in i)
+            {
+                b.isEnabled=true
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when(v.id)
+        {
+            R.id.btn1->{
+                edt.setText(edt.text.toString()+"1")
+            }
+            R.id.btn2->{
+                edt.setText(edt.text.toString()+"2")
+            }
+            R.id.btn3->{
+                edt.setText(edt.text.toString()+"3")
+            }
+            R.id.btn4->{
+                edt.setText(edt.text.toString()+"4")
+            }
+            R.id.btn5->{
+                edt.setText(edt.text.toString()+"5")
+            }
+            R.id.btn6->{
+                edt.setText(edt.text.toString()+"6")
+            }
+            R.id.btn7->{
+                edt.setText(edt.text.toString()+"7")
+            }
+            R.id.btn8->{
+                edt.setText(edt.text.toString()+"8")
+            }
+            R.id.btn9->{
+                edt.setText(edt.text.toString()+"9")
+            }
+            R.id.btn0->{
+                edt.setText(edt.text.toString()+"0")
+            }
+            R.id.btndiv->{
+                res1=edt.text.toString().toFloat()
+                edt.setText("")
+                div=true
+            }
+            R.id.btnadd->{
+                res1=edt.text.toString().toFloat()
+                edt.setText("")
+                add=true
+            }
+            R.id.btnmin->{
+                res1=edt.text.toString().toFloat()
+                edt.setText("")
+                min=true
+            }
+            R.id.btnmul->{
+                res1=edt.text.toString().toFloat()
+                edt.setText("")
+                mul=true
+            }
+            R.id.btneq->{
+                res2=edt.text.toString().toFloat()
+                if(add==true)
+                {
+                    var fres:Float=res1+res2
+                    edt.setText(fres.toString())
+                    add=false;
+                }
+                else if(min==true)
+                {
+                    var fres:Float=res1-res2
+                    edt.setText(fres.toString())
+                    min=false;
+                }
+                else if(mul==true)
+                {
+                    var fres:Float=res1*res2
+                    edt.setText(fres.toString())
+                    mul=false;
+                }
+                else if(div==true)
+                {
+                    var fres:Float=res1/res2
+                    edt.setText(fres.toString())
+                    div=false;
+                }
+            }
+            R.id.btnclr->{
+                edt.setText("")
+                div=false;
+                add=false;
+                mul=false;
+                min=false;
+            }
+
+
+        }
+    }
+}
